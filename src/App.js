@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
 
 function App() {
+  // Hook for getting API data
+  const [data, setData] = useState([]);
+
+  // Hook for running API call instantly
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products")
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data);
+      })
+      .catch((e) => {
+        console.log("There is something wrong");
+      });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1 className="my-4">Product List</h1>
+      <div className="row">
+        {data.map((ecom) => (
+          <div className="col-md-4" key={ecom.id}>
+            <div className="card mb-4" style={{ width: '18rem' }}>
+              <img src={ecom.image} className="card-img-top" alt={ecom.title} />
+              <div className="card-body">
+                <h5 className="card-title">{ecom.title}</h5>
+                <p className="card-text">{ecom.description}</p>
+                <p className="card-text"><strong>Price:</strong> ${ecom.price}</p>
+                <p className="card-text"><strong>Category:</strong> {ecom.category}</p>
+                <p className="card-text"><strong>Rating:</strong> {ecom.rating.rate} ({ecom.rating.count} reviews)</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
 
 export default App;
+
