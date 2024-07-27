@@ -15,7 +15,7 @@ Project API2 is a React-based web application that fetches product data from a p
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/ridhwanrosman1901/project-api2.git
+   git clone https://github.com/ridhwanrosman1901/project_api2.git
    cd project-api2
 
 2. **Install dependencies:**
